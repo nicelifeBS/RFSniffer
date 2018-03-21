@@ -77,9 +77,9 @@ def get_code(
     p_short = [x for x in code_times if isclose(x, min_time, .9)]
     p_long = set(code_times).symmetric_difference(set(p_extralong + p_short))
 
-    print 'extra long delay: ', average(p_extralong)
-    print 'short delay     : ', average(p_short)
-    print 'long delay      : ', average(p_long)
+    print('extra long delay: ', average(p_extralong))
+    print('short delay     : ', average(p_short))
+    print('long delay      : ', average(p_long))
     
     return code
 
@@ -126,7 +126,7 @@ if __name__ == '__main__':
     # find_delays(times, values)
     # print max_times
     code = get_code(times, values)
-    print 'code:     ', code, len(code)
+    print('code:     ', code, len(code))
     # print 'baseline: ', baseline, len(baseline)
     # assert(code == baseline)
 

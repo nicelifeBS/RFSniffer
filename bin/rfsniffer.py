@@ -16,7 +16,7 @@ ON_PI = True
 try:
     import RPi.GPIO as gpio
 except ImportError as error:
-    print 'Running not on a pi?: ', error
+    print('Running not on a pi?: ', error)
     ON_PI = False
 
 RECEIVED_SIGNAL = [[], []]  #[[time of reading], [signal reading]]
@@ -49,17 +49,17 @@ def main():
     gpio.setup(revceive_pin, gpio.IN)
     cumulative_time = 0
     beginning_time = datetime.now()
-    print '**Started recording**'
+    print('**Started recording**')
     while cumulative_time < MAX_DURATION:
         time_delta = datetime.now() - beginning_time
         RECEIVED_SIGNAL[0].append(time_delta)
         RECEIVED_SIGNAL[1].append(gpio.input(revceive_pin))
         cumulative_time = time_delta.seconds
-    print '**Ended recording**'
-    print len(RECEIVED_SIGNAL[0]), 'samples recorded'
+    print('**Ended recording**')
+    print(len(RECEIVED_SIGNAL[0]), 'samples recorded')
     gpio.cleanup()
 
-    print '**Processing results**'
+    print('**Processing results**')
     for i in range(len(RECEIVED_SIGNAL[0])):
         RECEIVED_SIGNAL[0][i] = \
             RECEIVED_SIGNAL[0][i].seconds + \
@@ -67,7 +67,7 @@ def main():
 
     times, values = RECEIVED_SIGNAL
     code = rf_utils.get_code(times, values)
-    print 'Code found: ', code
+    print('Code found: ', code)
 
     # dumping file
     if p_args.dump:
@@ -77,7 +77,7 @@ def main():
 
 if __name__ == '__main__':
     if not ON_PI:
-        print 'Following args where parsed'
-        print args()
+        print('Following args where parsed')
+        print(args())
     else:
         main()
